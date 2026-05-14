@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Settings, Upload, Music, Pause, Play, RotateCcw } from "lucide-react";
+import sampleImg from "@/assets/Sample.jpg";
+import sampleAudio from "@/assets/Sample.mp3";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -18,8 +20,8 @@ const LABELS: Record<SpeedKey, string> = {
 const PASSWORD = "stall";
 
 function Index() {
-  const [imgUrl, setImgUrl] = useState<string | null>(null);
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [imgUrl, setImgUrl] = useState<string | null>(sampleImg);
+  const [audioUrl, setAudioUrl] = useState<string | null>(sampleAudio);
   const [speed, setSpeed] = useState<SpeedKey>("2");
   const [durations, setDurations] = useState<Record<SpeedKey, number>>(() => {
     if (typeof window === "undefined") return DEFAULT_DURATIONS;
@@ -173,7 +175,7 @@ function Index() {
           {(["1", "2", "3"] as SpeedKey[]).map((k) => (
             <button
               key={k}
-              onClick={() => setSpeed(k)}
+              onClick={() => { setSpeed(k); setPlaying(true); }}
               className={`px-5 py-2 rounded-full border text-sm transition ${
                 speed === k
                   ? "bg-white text-black border-white"
