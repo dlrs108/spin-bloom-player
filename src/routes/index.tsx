@@ -20,6 +20,14 @@ const LABELS: Record<SpeedKey, string> = {
 const PASSWORD = "stall";
 
 function Index() {
+  // 👇 1. 加上这个状态
+  const [isClient, setIsClient] = useState(false);
+
+  // 👇 2. 加上这个 useEffect
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
   const [imgUrl, setImgUrl] = useState<string | null>(sampleImg);
   const [audioUrl, setAudioUrl] = useState<string | null>(sampleAudio);
   const [speed, setSpeed] = useState<SpeedKey>("2");
@@ -130,7 +138,7 @@ function Index() {
   };
 
   const rotSec = ROT_SECS[speed];
-
+  if (!isClient) return null;
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <style>{`
