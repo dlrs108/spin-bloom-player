@@ -11,20 +11,21 @@
 import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
-import path from "path"; // 引入 path 模块
 
 export default defineConfig({
   base: "/spin-bloom-player/", 
   plugins: [
     tanstackStart({
-      target: "static", 
+      // 👇 加上这一段，强制开启静态预渲染
+      prerender: {
+        enabled: true, 
+      },
     }),
     react(), 
   ],
-  // 👇 加上这一段，告诉 Vite @ 代表 src 目录
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"), // 别忘了你之前的路径别名
     },
   },
 });
