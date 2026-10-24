@@ -32,8 +32,15 @@ jobs:
       - name: Build
         run: bun run build
         env:
-          # 让 TanStack Start 知道部署路径
           BASE_URL: /${{ github.event.repository.name }}/
+
+      # 👇 帮我们找出 index.html 到底生成在哪了
+      - name: Debug Output
+        run: |
+          echo "=== 根目录文件 ==="
+          ls -la
+          echo "=== 查找 index.html 位置 ==="
+          find . -name "index.html" -not -path "*/node_modules/*"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -41,9 +48,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # TanStack Start 默认构建产物通常在 dist 或 .output/public
-          # 先填 ./dist，如果报错找不到，尝试改成 ./.output/public
-          path: ".output/public"
+          # 🚨 注意：这里先填 "./dist"，如果跑完报错找不到文件，
+          # 请看 Actions 日志里 "Debug Output" 打印出来的路径，把这里改掉。
+          path: "./dist"
 
   deploy:
     environment:
