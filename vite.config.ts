@@ -13,13 +13,13 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  // 1. 必须加上你的仓库名作为 base，否则页面里的 CSS/JS 会 404
   base: "/spin-bloom-player/", 
   plugins: [
-    react(),
+    // 1. 路由/Start 插件必须放在最前面
     tanstackStart({
-      // 2. 强制输出静态 HTML，而不是 SSR 服务端代码
       target: "static", 
     }),
+    // 2. React 插件必须放在后面
+    react(), 
   ],
 });
