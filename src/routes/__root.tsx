@@ -8,7 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?inline";
+import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -81,6 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
     ],
+    links: [
+      { rel: "stylesheet", href: appCss },
+    ],
+  }),
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -92,7 +96,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <style dangerouslySetInnerHTML={{ __html: appCss }} />
         <HeadContent />
       </head>
       <body>
