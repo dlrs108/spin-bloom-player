@@ -20,22 +20,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "22"
+          bun-version: latest
+
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: bun install
+
       - name: Build
+        run: bun run build
         env:
-          BASE_PATH: /${{ github.event.repository.name }}/
-        run: npm run build
+          # 让 TanStack Start 知道部署路径
+          BASE_URL: /${{ github.event.repository.name }}/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist" # 如果你的打包目录不是 dist，请修改这里
+          # TanStack Start 默认构建产物通常在 dist 或 .output/public
+          # 先填 ./dist，如果报错找不到，尝试改成 ./.output/public
+          path: "./dist"
 
   deploy:
     environment:
