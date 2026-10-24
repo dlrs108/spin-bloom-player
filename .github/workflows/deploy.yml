@@ -50,7 +50,7 @@ jobs:
         with:
           # 🚨 注意：这里先填 "./dist"，如果跑完报错找不到文件，
           # 请看 Actions 日志里 "Debug Output" 打印出来的路径，把这里改掉。
-          path: "./dist"
+          path: ".dist/client"
 
   deploy:
     environment:
