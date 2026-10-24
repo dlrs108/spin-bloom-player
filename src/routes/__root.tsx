@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
+// 👇 使用标准的 ?url 引入样式
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -81,11 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
     ],
+    // 👇 把 links 数组正确地加回来
     links: [
-      { rel: "stylesheet", href: appCss },
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
     ],
-  }),
-  }),
+  }), // 👈 注意这里的括号和逗号，容易漏掉或写错
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -96,6 +100,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {/* 👇 这里不需要 <style> 标签了，HeadContent 会自动把上面的 links 注入进来 */}
         <HeadContent />
       </head>
       <body>
