@@ -11,6 +11,7 @@
 import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 // 👇 补上这两个 Node.js 核心模块的引入
 import path from "node:path";
 import { fileURLToPath } from "node:url";
