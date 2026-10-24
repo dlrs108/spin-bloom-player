@@ -33,6 +33,7 @@ export default defineConfig({
         preset: 'static'
       }
     }),
+    tailwindcss(),
     react(), 
   ],
   resolve: {
