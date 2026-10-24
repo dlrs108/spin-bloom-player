@@ -43,7 +43,7 @@ jobs:
         with:
           # TanStack Start 默认构建产物通常在 dist 或 .output/public
           # 先填 ./dist，如果报错找不到，尝试改成 ./.output/public
-          path: "./dist"
+          path: ".output/public"
 
   deploy:
     environment:
